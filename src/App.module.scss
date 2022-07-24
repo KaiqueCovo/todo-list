@@ -1,0 +1,16 @@
+.wrapper {
+  position: relative;
+  top: -1.5625rem;
+
+  max-width: 46rem;
+
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  .tasksList {
+    margin-top: 4rem;
+  }
+}
