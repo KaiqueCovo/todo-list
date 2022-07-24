@@ -1,5 +1,5 @@
 import styles from './App.module.scss';
-import { Header, NewTask, Tasks } from './components';
+import { Header, NewTask, TodoList } from './components';
 
 function App() {
   return (
@@ -7,8 +7,8 @@ function App() {
       <Header />
       <main className={styles.wrapper}>
         <NewTask />
-        <div className={styles.tasksList}>
-          <Tasks />
+        <div className={styles.todoList}>
+          <TodoList />
         </div>
       </main>
     </div>
