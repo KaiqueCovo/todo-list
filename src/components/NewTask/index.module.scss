@@ -18,12 +18,16 @@
   button {
     display: inline-flex;
     align-items: center;
+
     font-size: 0.875rem;
     font-weight: 700;
+
     color: var(--gray-100);
     background-color: var(--blue-dark);
+
     border-radius: 8px;
     border: none;
+
     padding: 1rem;
     transition: background-color 0.1s;
 
