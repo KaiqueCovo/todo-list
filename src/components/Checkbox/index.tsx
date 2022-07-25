@@ -4,11 +4,11 @@ import styles from './index.module.scss';
 
 type ICheckboxProps = InputHTMLAttributes<HTMLInputElement>;
 
-export function Checkbox({ id, checked }: ICheckboxProps) {
+export function Checkbox({ id, ...props }: ICheckboxProps) {
   return (
     <div>
       <div className={styles.checkbox}>
-        <input type='checkbox' checked={checked} id={id} />
+        <input type='checkbox' id={id} {...props} />
         <label htmlFor={id}></label>
       </div>
     </div>
