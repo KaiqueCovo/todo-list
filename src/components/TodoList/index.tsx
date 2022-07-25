@@ -56,7 +56,9 @@ export function TodoList({ tasks, onCompleteTask, onDeleteTask }: ITodoList) {
               checked={task.completed}
               onChange={() => onCompleteTask(task.id)}
             />
-            <p>{task.content}</p>
+            <p className={task.completed ? styles.taskCompleted : ''}>
+              {task.content}
+            </p>
             <Trash size={14} onClick={() => onDeleteTask(task.id)} />
           </li>
         ))}
