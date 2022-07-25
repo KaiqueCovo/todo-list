@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { Trash } from 'phosphor-react';
 
 import clipboard from '../../assets/clipboard.png';
+import { ITask } from '../../interface';
 import { Checkbox } from '../Checkbox';
 import styles from './index.module.scss';
 
@@ -18,65 +19,31 @@ function EmptyList() {
   );
 }
 
-interface ITask {
-  id: string;
-  content: string;
-  completed: boolean;
+interface ITodoList {
+  tasks: ITask[];
+  onCompleteTask: (id: string) => void;
+  onDeleteTask: (id: string) => void;
 }
 
-export function TodoList() {
-  const [tasks, setTasks] = useState<ITask[]>([
-    {
-      id: '1',
-      content: 'IHAA 1',
-      completed: false,
-    },
-    {
-      id: '2',
-      content: 'IHAA 2',
-      completed: false,
-    },
-    {
-      id: '3',
-      content: 'IHAA 3',
-      completed: false,
-    },
-  ]);
-
+export function TodoList({ tasks, onCompleteTask, onDeleteTask }: ITodoList) {
   const completedTasks: number = useMemo(
     () => tasks.reduce((acc, task) => (task.completed ? acc + 1 : acc), 0),
     [tasks],
   );
 
-  function handleCompleteTask(id: string): void {
-    const changeTaskCompletedType = tasks.map((task) => {
-      if (task.id === id) {
-        task.completed = !task.completed;
-      }
-
-      return task;
-    });
-
-    setTasks(changeTaskCompletedType);
-  }
-
-  function handleDeleteTask(id: string): void {
-    const removeTaskFromList = tasks.filter((task) => task.id !== id);
-
-    setTasks(removeTaskFromList);
-  }
+  const totalTasks = tasks.length;
 
   return (
     <div className={styles.tasks}>
       <div className={styles.header}>
         <span>
           Tarefas criadas
-          <small>{tasks.length}</small>
+          <small>{totalTasks}</small>
         </span>
 
         <span>
           Concluídas
-          <small>{completedTasks}</small>
+          <small>{`${completedTasks} de ${totalTasks}`}</small>
         </span>
       </div>
       <ul className={styles.todoList}>
@@ -87,10 +54,10 @@ export function TodoList() {
             <Checkbox
               id={task.id}
               checked={task.completed}
-              onChange={() => handleCompleteTask(task.id)}
+              onChange={() => onCompleteTask(task.id)}
             />
             <p>{task.content}</p>
-            <Trash size={14} onClick={() => handleDeleteTask(task.id)} />
+            <Trash size={14} onClick={() => onDeleteTask(task.id)} />
           </li>
         ))}
       </ul>

@@ -2,9 +2,14 @@ import { ChangeEvent, createRef, FormEvent, InvalidEvent } from 'react';
 
 import { PlusCircle } from 'phosphor-react';
 
+import { ITask } from '../../interface';
 import styles from './index.module.scss';
 
-export function NewTask() {
+interface INewTaskProps {
+  onAddNewTask: (task: ITask) => void;
+}
+
+export function NewTask({ onAddNewTask }: INewTaskProps) {
   const inputRef = createRef<HTMLInputElement>();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -14,7 +19,11 @@ export function NewTask() {
 
     const inputValue = inputRef.current.value;
 
-    console.log(inputValue);
+    onAddNewTask({
+      id: crypto.randomUUID(),
+      content: inputValue,
+      completed: false,
+    });
 
     inputRef.current.value = '';
   }
